@@ -1,4 +1,6 @@
 from fastapi import FastAPI, Form
+from fastapi.middleware.cors import CORSMiddleware
+
 import subprocess
 import ast
 import time
@@ -7,6 +9,14 @@ import re
 import errno
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Define a safe subset of allowed Python operations
 ALLOWED_MODULES = ['math', 'random']
